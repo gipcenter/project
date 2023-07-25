@@ -2,6 +2,7 @@
 
 namespace Admin;
 
+use Auth\Auth;
 
 class Admin
 {
@@ -10,6 +11,8 @@ class Admin
 
     function __construct()
     {
+        $auth = new Auth();
+        $auth->checkAdmin();
         $this->currentDomain = CURRENT_DOMAIN;
         $this->basePath = BASE_PATH;
     }
@@ -34,10 +37,10 @@ class Admin
     {
 
         if ($imageName) {
-            $extension = explode('/', $image['type'][1]);
+            $extension = explode('/', $image['type'])[1];
             $imageName = $imageName . '.' . $extension;
         } else {
-            $extension = explode('/', $image['type'][1]);
+            $extension = explode('/', $image['type'])[1];
             $imageName = date("Y-m-d-H-i-s") . '.' . $extension;
         }
 
@@ -57,7 +60,7 @@ class Admin
 
     protected function removeImage($path)
     {
-        $path = trim($this->basePath, '/ ') . '/' . trim($path, '/ ');
+        $path = trim($path, '/ ');
         if (file_exists($path)) {
             unlink($path);
         }

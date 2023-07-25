@@ -23,37 +23,38 @@ require_once(BASE_PATH . '/template/admin/layouts/header.php');
                     <?php
                     foreach ($categories as $category) {
                     ?>
-                    <option value="<?= $category['id'] ?>" <?php if ($category['id'] == $post['cat_id']) {
-                                                                    echo 'selected';
-                                                                } ?>>
-                        <?= $category['name'] ?>
-                    </option>
+                        <option value="<?= $category['id'] ?>" <?php if ($category['id'] == $post['cat_id']) echo 'selected'; ?>>
+                            <?= $category['name'] ?>
+                        </option>
                     <?php } ?>
                 </select>
             </div>
+            <hr />
 
-            <div class="form-group">
-                <img style="width: 100px;" src="" alt="">
-                <hr />
-                <label for="image">Image</label>
-                <input type="file" id="image" name="image" class="form-control-file" autofocus>
+            <div class="form-group" style="display: flex; align-items: center; justify-content: space-between; flex-direction: row-reverse;">
+                <div style=" margin-right: 10px;">
+                    <img style="width: 111px;" src="<?= asset($post['image']) ?>" alt="">
+                </div>
+                <div style="text-align: left; ">
+                    <label for="image" class="active">Image</label>
+                    <input type="file" id="image" name="image" class="form-control-file" autofocus="">
+                </div>
             </div>
+
+
 
             <div class="form-group">
                 <label for="published_at">published at</label>
-                <input type="text" class="form-control" id="published_at" name="published_at"
-                    value="<?= $post['published_at'] ?>" required autofocus>
+                <input type="text" class="form-control" id="published_at" name="published_at" value="<?= $post['published_at'] ?>" required autofocus>
             </div>
 
             <div class="form-group">
                 <label for="summary">summary</label>
-                <textarea class="form-control" id="summary" name="summary" placeholder="summary ..."
-                    rows="3"><?= $post['summary'] ?></textarea>
+                <textarea class="form-control" id="summary" name="summary" rows="3"><?= $post['summary'] ?></textarea>
             </div>
             <div class="form-group">
                 <label for="body">body</label>
-                <textarea class="form-control" id="body" name="body" placeholder="body ..."
-                    rows="5"><?= $post['body'] ?></textarea>
+                <textarea class="form-control" id="body" name="body" rows="5"><?= $post['body'] ?></textarea>
             </div>
             <button type="submit" class="btn btn-primary btn-sm">update</button>
         </form>

@@ -26,16 +26,14 @@ require_once(BASE_PATH . '/template/admin/layouts/header.php');
             $i = 1;
             foreach ($categories as $category) {
             ?>
-            <tr>
-                <td><?= $i++ ?></td>
-                <td><?= $category['name'] ?></td>
-                <td>
-                    <a role="button" href="<?= url('admin/category/edit/' . $category['id']) ?>"
-                        class="btn btn-sm btn-info my-0 mx-1 text-white">update</a>
-                    <a role="button" href="<?= url('admin/category/delete/' . $category['id']) ?>"
-                        class="btn btn-sm btn-danger my-0 mx-1 text-white">delete</a>
-                </td>
-            </tr>
+                <tr>
+                    <td><?= $i++ ?></td>
+                    <td><?= $category['name'] ?></td>
+                    <td>
+                        <a role="button" href="<?= url('admin/category/edit/' . $category['id']) ?>" class="btn btn-sm btn-info my-0 mx-1 text-white">update</a>
+                        <a role="button" href="<?= url('admin/category/delete/' . $category['id']) ?>" class="btn btn-sm btn-danger my-0 mx-1 text-white">delete</a>
+                    </td>
+                </tr>
             <?php } ?>
         </tbody>
     </table>

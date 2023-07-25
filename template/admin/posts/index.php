@@ -23,8 +23,8 @@ require_once(BASE_PATH . '/template/admin/layouts/header.php');
                 <th>summary</th>
                 <th>view</th>
                 <th>status</th>
-                <th>user ID</th>
-                <th>cat ID</th>
+                <th>user</th>
+                <th>Category</th>
                 <th>image</th>
                 <th>setting</th>
             </tr>
@@ -37,57 +37,47 @@ require_once(BASE_PATH . '/template/admin/layouts/header.php');
             foreach ($posts as $post) {
             ?>
 
-            <tr>
-                <td>
-                    <?= $i++ ?>
-                </td>
-                <td>
-                    <?= $post['title'] ?>
-                <td>
-                    <?= $post['summary'] ?> </td>
-                <td>
-                    <?= $post['view'] ?>
-                </td>
-                <td>
-                    <?php if ($post['breaking_news'] == 1) { ?>
-                    <span class=" badge badge-success">#breaking_news</span>
-                    <?php } ?>
+                <tr>
+                    <td>
+                        <?= $i++ ?>
+                    </td>
+                    <td style="text-align: justify; padding-right: 10px;padding-left: 10px;">
+                        <?= $post['title'] ?>
+                    <td style="text-align: justify; padding-right: 10px;padding-left: 10px;">
+                        <?= $post['summary'] ?> </td>
+                    <td>
+                        <?= $post['view'] ?>
+                    </td>
+                    <td>
+                        <?= $post['breaking_news'] == 1 ? '<span class="badge badge-success">#breaking_news</span>' : '' ?>
+                        <?= $post['selected'] == 1 ? ' <span class="badge badge-dark">#editor_selected</span>' : '' ?>
 
-
-                    <?php if ($post['selelcted'] == 1) { ?>
-                    <span class=" badge badge-dark">#editor_selected</span>
-                    <?php } ?>
-
-                </td>
-                <td>
-                    <?= $post['user_name'] ?>
-                    (<?= $post['user_id'] ?>)
-                </td>
-                <td>
-                    <?= $post['category_name'] ?>
-                    (<?= $post['cat_id'] ?>)
-                </td>
-                <td><img style=" width: 80px;" src="<?= asset($post['image']) ?>" alt=""></td>
-                <td style=" width: 25rem;">
+                    </td>
+                    <td>
+                        <?= $post['user_name'] ?>
+                    </td>
+                    <td>
+                        <?= $post['category_name'] ?>
+                    </td>
+                    <td><img style=" width: 80px;" src="<?= asset($post['image']) ?>" alt=""></td>
+                    <td style=" width: 25rem;">
 
 
 
-                    <a role=" button" class=" btn btn-sm btn-warning text-dark" href="">
-                        <?= $post['breaking_news'] == 1 ? 'remove breaking news' : 'add breaking news'  ?>
-                    </a>
+                        <a role=" button" class=" btn btn-sm btn-warning text-dark" href="<?= url('admin/post/breaking-news/' . $post['id']) ?>">
+                            <?= $post['breaking_news'] == 1 ? 'remove breaking news' : 'add breaking news'  ?>
+                        </a>
 
-                    <a role=" button" class=" btn btn-sm btn-warning text-dark" href="">
-                        <?= $post['selelcted'] == 1 ? 'remove selcted' : 'add selected' ?>
-                    </a>
+                        <a role=" button" class=" btn btn-sm btn-warning text-dark" href="<?= url('admin/post/selected/' . $post['id']) ?>">
+                            <?= $post['selected'] == 1 ? 'remove selcted' : 'add selected' ?>
+                        </a>
 
 
-                    <hr class=" my-1" />
-                    <a role=" button" class=" btn btn-sm btn-primary text-white"
-                        href="<?= url('admin/post/edit/' . $post['id']) ?>">edit</a>
-                    <a role=" button" class=" btn btn-sm btn-danger text-white"
-                        href="<?= url('admin/post/delete/' . $post['id']) ?>">delete</a>
-                </td>
-            </tr>
+                        <hr class=" my-1" />
+                        <a role=" button" class=" btn btn-sm btn-primary text-white" href="<?= url('admin/post/edit/' . $post['id']) ?>">edit</a>
+                        <a role=" button" class=" btn btn-sm btn-danger text-white" href="<?= url('admin/post/delete/' . $post['id']) ?>">delete</a>
+                    </td>
+                </tr>
             <?php } ?>
         </tbody>
 

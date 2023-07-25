@@ -1,8 +1,8 @@
 <?php
 
-use database\CreateDB;
-use database\Database;
+use Auth\Auth;
 
+//session start
 session_start();
 
 define('BASE_PATH', __DIR__);
@@ -14,26 +14,56 @@ define('DB_USERNAME', 'root');
 define('DB_PASSWORD', '');
 
 
+//Mail
+define('MAIL_HOST', 'mail.shopoila.ir');
+define('SMTP_AUTH', true);
+define('MAIL_USERNAME', 'support@shopoila.ir');
+define('MAIL_PASSWORD', '!2345Qwe24625');
+define('MAIL_PORT', 587);
+define('SENDER_MAIL', 'support@shopoila.ir');
+define('SENDER_NAME', 'iman admin');
+
+
+
+
 
 // ------------------------- آدرس دهی به کلاس ها-----------------------
 
 require_once 'database/DataBase.php';
-
+require_once 'database/CreateDB.php';
 require_once 'activities/Admin/Admin.php';
 require_once 'activities/Admin/Category.php';
 require_once 'activities/Admin/Post.php';
+require_once 'activities/Admin/Banner.php';
+require_once 'activities/Admin/User.php';
+require_once 'activities/Admin/Comment.php';
+require_once 'activities/Admin/menu.php';
+require_once 'activities/Admin/Websetting.php';
+
+
+
+
+//Auth
+require_once 'activities/Auth/Auth.php';
 
 
 
 
 
-
-
-
-
-// require_once 'database/CreateDB.php';
-// $db = new CreateDB();
+// $db = new database\Database();
+// $db = new database\CreateDB();
 // $db->run();
+
+
+spl_autoload_register(function ($className) {
+    $path = BASE_PATH . DIRECTORY_SEPARATOR . 'lib' . DIRECTORY_SEPARATOR;
+    $className = str_replace('\\', DIRECTORY_SEPARATOR, $className);
+    include $path . $className . '.php';
+});
+
+
+// $auth = new Auth();
+// $auth->sendMail('gipcenter3@gmail.com', 'in email test2', '<p>in email testi ersal shodeh test2</p>');
 
 // ------------------------- سیستم روتینگ -----------------------
 
@@ -84,7 +114,7 @@ function uri($reservedUrl, $class, $method, $requestMethod = 'GET')
 // admin/category/edit/{id} reserved url
 // admin/category/delete/{id} reserved url
 
-// admin/category/edit/5 current url 
+// admin/category/edit/5 current url
 // uri('admin/category', 'Category', 'index');
 
 
@@ -206,7 +236,70 @@ uri('admin/post/edit/{id}', 'Admin\Post', 'edit');
 uri('admin/post/update/{id}', 'Admin\Post', 'update', 'POST');
 uri('admin/post/delete/{id}', 'Admin\Post', 'delete');
 
+uri('admin/post/selected/{id}', 'Admin\Post', 'selected');
+uri('admin/post/breaking-news/{id}', 'Admin\Post', 'breakingNews');
 
+
+// ------------ Banner ---------
+uri('admin/banner', 'Admin\Banner', 'index');
+uri('admin/banner/create', 'Admin\Banner', 'create');
+uri('admin/banner/store', 'Admin\Banner', 'store', 'POST');
+uri('admin/banner/edit/{id}', 'Admin\Banner', 'edit');
+uri('admin/banner/update/{id}', 'Admin\Banner', 'update', 'POST');
+uri('admin/banner/delete/{id}', 'Admin\Banner', 'delete');
+
+uri('admin/banner/selected/{id}', 'Admin\Banner', 'selected');
+
+
+
+// ------------ User ---------
+uri('admin/user', 'Admin\User', 'index');
+uri('admin/user/edit/{id}', 'Admin\User', 'edit');
+uri('admin/user/update/{id}', 'Admin\User', 'update', 'POST');
+uri('admin/user/delete/{id}', 'Admin\User', 'delete');
+uri('admin/user/permission/{id}', 'Admin\User', 'permission');
+
+
+
+// ------------ Comment ---------
+uri('admin/comment', 'Admin\Comment', 'index');
+uri('admin/comment/status/{id}', 'Admin\Comment', 'status');
+uri('admin/comment/show/{id}', 'Admin\Comment', 'show');
+
+
+
+
+// ------------ Menu ---------
+uri('admin/menu', 'Admin\Menu', 'index');
+uri('admin/menu/create', 'Admin\Menu', 'create');
+uri('admin/menu/store', 'Admin\Menu', 'store', 'POST');
+uri('admin/menu/edit/{id}', 'Admin\Menu', 'edit');
+uri('admin/menu/update/{id}', 'Admin\Menu', 'update', 'POST');
+uri('admin/menu/delete/{id}', 'Admin\Menu', 'delete');
+
+
+
+
+
+// ------------ Websetting ---------
+uri('admin/websetting', 'Admin\Websetting', 'index');
+uri('admin/websetting/edit', 'Admin\Websetting', 'edit');
+uri('admin/websetting/update', 'Admin\Websetting', 'update', 'POST');
+
+
+
+//Auth
+uri('register', 'Auth\Auth', 'Register');
+uri('register/store', 'Auth\Auth', 'RegisterStore', 'POST');
+uri('activation/{veryfy_token}', 'Auth\Auth', 'activation',);
+
+uri('login', 'Auth\Auth', 'login');
+uri('check-login', 'Auth\Auth', 'checkLogin', 'POST');
+uri('logout', 'Auth\Auth', 'logOut');
+
+uri('forgot', 'Auth\Auth', 'forGot');
+uri('forgot/request', 'Auth\Auth', 'forgotRequest', 'POST');
+uri('reset-password-form/{forgot_token}', 'Auth\Auth', 'resetPasswordView');
 
 
 echo '404 - Page Not Found';

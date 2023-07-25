@@ -5,6 +5,7 @@ require_once(BASE_PATH . '/template/admin/layouts/header.php');
 
 ?>
 
+</style>
 <section class="pt-3 pb-1 mb-2 border-bottom">
     <h1 class="h5">Create Article</h1>
 </section>
@@ -15,8 +16,7 @@ require_once(BASE_PATH . '/template/admin/layouts/header.php');
         <form method="post" action="<?= url('admin/post/store') ?>" enctype="multipart/form-data">
             <div class="form-group">
                 <label for="title">Title</label>
-                <input type="text" class="form-control" id="title" name="title" placeholder="Enter title ..." required
-                    autofocus>
+                <input type="text" class="form-control" id="title" name="title" placeholder="Enter title ..." required autofocus>
             </div>
 
             <div class="form-group">
@@ -26,9 +26,9 @@ require_once(BASE_PATH . '/template/admin/layouts/header.php');
                     <?php
                     foreach ($categories as $category) {
                     ?>
-                    <option value="<?= $category['id'] ?>">
-                        <?= $category['name'] ?>
-                    </option>
+                        <option value="<?= $category['id'] ?>">
+                            <?= $category['name'] ?>
+                        </option>
                     <?php } ?>
 
 
@@ -42,26 +42,26 @@ require_once(BASE_PATH . '/template/admin/layouts/header.php');
                 <input type="file" id="image" name="image" class="form-control-file" required autofocus>
             </div>
 
+            <script>
 
+            </script>
 
             <div class="form-group">
                 <label for="published_at">published at</label>
-                <input type="text" class="form-control d-none" id="published_at" name="published_at" required autofocus>
-                <input type="text" class="form-control" id="published_at_view" required autofocus>
+                <input type="text" class="form-control" id="published_at" name="published_at" required autofocus>
+                <!-- <input type="text" class="form-control" id="published_at_view" required autofocus> -->
             </div>
 
 
 
             <div class="form-group">
                 <label for="summary">summary</label>
-                <textarea class="form-control" id="summary" name="summary" placeholder="summary ..." rows="3" required
-                    autofocus></textarea>
+                <textarea class="form-control" id="summary" name="summary" placeholder="summary ..." rows="3"></textarea>
             </div>
 
             <div class="form-group">
                 <label for="body">body</label>
-                <textarea class="form-control" id="body" name="body" placeholder="body ..." rows="5" required
-                    autofocus></textarea>
+                <textarea class="form-control" id="body" name="body" placeholder="body ..." rows="5"></textarea>
             </div>
 
             <button type="submit" class="btn btn-primary btn-sm">store</button>
