@@ -13,16 +13,18 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
     <!-- Material Design Bootstrap -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.7.6/css/mdb.min.css" rel="stylesheet">
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/css/lightbox.min.css">
 
     <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
     <link rel="stylesheet" href="https://unpkg.com/jquery-datetimepicker/build/jquery.datetimepicker.min.css">
-
-
-
-
     <link href="<?= asset('public/admin-panel/css/style.css') ?>" rel="stylesheet" type="text/css">
-
+    <style>
+        a:hover {
+            /* background-color: #ffcc33; */
+            color: #fff;
+            text-shadow: 1px 1px 1px #000;
+        }
+    </style>
 </head>
 
 <body>
@@ -47,7 +49,7 @@
     <div class="container-fluid">
         <div class="row">
             <nav class="col-md-2 d-none d-md-block pt-3 bg-sidebar sidebar px-0">
-                <a class="text-decoration-none d-block py-1 px-2 mt-1" href=""><i class="fas fa-home"></i> Home</a>
+                <a class="text-decoration-none d-block py-1 px-2 mt-1" href="<?= url('admin') ?>"><i class="fas fa-home"></i> Home</a>
                 <a class="text-decoration-none d-block py-1 px-2 mt-1" href="<?= url('admin/category') ?>"><i class="fas fa-clipboard-list"></i>
                     Category</a>
                 <a class="text-decoration-none d-block py-1 px-2 mt-1" href="<?= url('admin/post') ?>"><i class="fas fa-newspaper"></i> Post</a>

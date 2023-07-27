@@ -32,13 +32,21 @@ class Post extends Admin
     }
 
 
+    public function show($id)
+    {
+
+        $db = new DataBase();
+        $showPost = $db->select("SELECT * FROM posts WHERE id = ?", [$id])->fetch();
+        require_once(BASE_PATH . '/template/admin/posts/show.php');
+    }
+
     public function store($request)
     {
         $db = new DataBase();
         if ($request['cat_id'] != null) {
             $request['image'] = $this->saveImage($request['image'], 'post-image', pathinfo($request['image']['name'], PATHINFO_FILENAME));
             if ($request['image']) {
-                $request = array_merge($request, ['user_id' => 1]);
+                $request = array_merge($request, ['user_id' => 18]);
                 $db->insert('posts', array_keys($request), $request);
 
                 $this->redirect('admin/post');
@@ -72,7 +80,7 @@ class Post extends Admin
             } else {
                 unset($request['image']);
             }
-            $request = array_merge($request, ['user_id' => 1]);
+            $request = array_merge($request, ['user_id' => 18]);
             $db->update('posts', $id, array_keys($request), $request);
             $this->redirect('admin/post');
         } else {

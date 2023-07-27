@@ -33,7 +33,9 @@ require_once(BASE_PATH . '/template/admin/layouts/header.php');
 
             <div class="form-group" style="display: flex; align-items: center; justify-content: space-between; flex-direction: row-reverse;">
                 <div style=" margin-right: 10px;">
-                    <img style="width: 111px;" src="<?= asset($post['image']) ?>" alt="">
+                    <a href="<?= asset($post['image']) ?>" data-lightbox="<?= $post['title'] ?>" data-title="<?= $post['summary'] ?>">
+                        <img style="width: 111px;" src="<?= asset($post['image']) ?>" alt="">
+                    </a>
                 </div>
                 <div style="text-align: left; ">
                     <label for="image" class="active">Image</label>

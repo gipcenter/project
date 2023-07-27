@@ -31,7 +31,9 @@ define('SENDER_NAME', 'iman admin');
 
 require_once 'database/DataBase.php';
 require_once 'database/CreateDB.php';
+
 require_once 'activities/Admin/Admin.php';
+require_once 'activities/Admin/Dashboard.php';
 require_once 'activities/Admin/Category.php';
 require_once 'activities/Admin/Post.php';
 require_once 'activities/Admin/Banner.php';
@@ -41,11 +43,11 @@ require_once 'activities/Admin/menu.php';
 require_once 'activities/Admin/Websetting.php';
 
 
-
-
 //Auth
 require_once 'activities/Auth/Auth.php';
 
+//App
+require_once 'activities/App/Home.php';
 
 
 
@@ -219,6 +221,10 @@ function dd($var)
 
 // ------------------------- رزرو مسیر سیستم روتینگ -----------------------
 
+
+// ------------ Dashboard ---------
+uri('admin', 'Admin\Dashboard', 'index');
+
 // ------------ Category ---------
 uri('admin/category', 'Admin\Category', 'index');
 uri('admin/category/create', 'Admin\Category', 'create');
@@ -235,6 +241,7 @@ uri('admin/post/store', 'Admin\Post', 'store', 'POST');
 uri('admin/post/edit/{id}', 'Admin\Post', 'edit');
 uri('admin/post/update/{id}', 'Admin\Post', 'update', 'POST');
 uri('admin/post/delete/{id}', 'Admin\Post', 'delete');
+uri('admin/post/show/{id}', 'Admin\Post', 'show');
 
 uri('admin/post/selected/{id}', 'Admin\Post', 'selected');
 uri('admin/post/breaking-news/{id}', 'Admin\Post', 'breakingNews');
@@ -300,6 +307,16 @@ uri('logout', 'Auth\Auth', 'logOut');
 uri('forgot', 'Auth\Auth', 'forGot');
 uri('forgot/request', 'Auth\Auth', 'forgotRequest', 'POST');
 uri('reset-password-form/{forgot_token}', 'Auth\Auth', 'resetPasswordView');
+uri('reset-password/{forgot_token}', 'Auth\Auth', 'resetPassword', 'POST');
 
+
+
+
+//Home || App
+uri('/', 'App\Home', 'index');
+uri('/home', 'App\Home', 'index');
+uri('/show-post/{id}', 'App\Home', 'show');
+uri('/show-category/{id}', 'App\Home', 'category');
+uri('/comment-store', 'App\Home', 'commentStore', 'POST');
 
 echo '404 - Page Not Found';

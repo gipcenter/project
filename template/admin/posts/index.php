@@ -42,9 +42,9 @@ require_once(BASE_PATH . '/template/admin/layouts/header.php');
                         <?= $i++ ?>
                     </td>
                     <td style="text-align: justify; padding-right: 10px;padding-left: 10px;">
-                        <?= $post['title'] ?>
+                        <a href="<?= url('admin/post/show/' . $post['id']) ?>"><?= $post['title'] ?></a>
                     <td style="text-align: justify; padding-right: 10px;padding-left: 10px;">
-                        <?= $post['summary'] ?> </td>
+                        <?= substr($post['summary'], 0, 70) . '...' ?> </td>
                     <td>
                         <?= $post['view'] ?>
                     </td>
@@ -59,7 +59,11 @@ require_once(BASE_PATH . '/template/admin/layouts/header.php');
                     <td>
                         <?= $post['category_name'] ?>
                     </td>
-                    <td><img style=" width: 80px;" src="<?= asset($post['image']) ?>" alt=""></td>
+                    <td>
+                        <a href="<?= asset($post['image']) ?>" data-lightbox="<?= $post['title'] ?>" data-title="<?= $post['summary'] ?>">
+                            <img style=" width: 80px;" src="<?= asset($post['image']) ?>" alt="<?= $post['title'] ?>">
+                        </a>
+                    </td>
                     <td style=" width: 25rem;">
 
 

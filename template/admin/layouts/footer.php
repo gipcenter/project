@@ -8,7 +8,7 @@
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
 <script src="https://unpkg.com/jquery-datetimepicker/build/jquery.datetimepicker.full.min.js"></script>
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/js/lightbox.min.js"></script>
 <script src="<?= asset('public/admin-panel/js/bootstrap.min.js') ?>"></script>
 <script src="<?= asset('public/admin-panel/js/mdb.min.js') ?>"></script>
 <script src="<?= asset('public/ckeditor/ckeditor.js') ?>"></script>

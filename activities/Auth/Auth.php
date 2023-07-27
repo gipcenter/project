@@ -246,7 +246,7 @@ class Auth
   public function forgotRequest($request)
   {
     if ($request['email'] == null) {
-      flash('register_ERROR', 'Entering an email is mandatory.');
+      flash('forgot_error', 'Entering an email is mandatory.');
       $this->redirectBack();
     } else if (!filter_var($request['email'], FILTER_VALIDATE_EMAIL)) {
       flash('forgot_error', 'Please enter a valid email.');
@@ -255,7 +255,7 @@ class Auth
       $db = new DataBase();
       $user = $db->select("SELECT * FROM users WHERE email = ?", [$request['email']])->fetch();
       if ($user == null) {
-        flash('register_ERROR', 'No user exists with this email.');
+        flash('forgot_error', 'No user exists with this email.');
         $this->redirectBack();
       } else {
 
@@ -277,5 +277,34 @@ class Auth
 
   public function resetPasswordView($forgotToken)
   {
+    require_once(BASE_PATH . '/template/auth/reset-password.php');
+  }
+
+
+  public function resetPassword($request, $forgotToken)
+  {
+    if (!isset($request['password']) || strlen($request['password']) < 8) {
+      flash('reset_error', 'Please ensure that your password is at least 8 characters long.');
+      $this->redirectBack();
+    } else {
+      $db = new DataBase();
+      $user = $db->select('SELECT * FROM users WHERE forgot_token = ?', [$forgotToken])->fetch();
+      if ($user == null) {
+        flash('reset_error', 'No user exists.');
+        $this->redirectBack();
+      } else {
+        if ($user['forgot_token_expire'] < date('Y-m-d H:m:s')) {
+          flash('reset_error', 'Your token has expired. Please try again.');
+          $this->redirectBack();
+        }
+        if ($user) {
+          $db->update('users', $user['id'], ['password'], [$this->hash($request['password'])]);
+          $this->redirect('login');
+        } else {
+          flash('reset_error', 'No user exists.');
+          $this->redirectBack();
+        }
+      }
+    }
   }
 }
