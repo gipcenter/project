@@ -15,12 +15,12 @@ define('DB_PASSWORD', '');
 
 
 //Mail
-define('MAIL_HOST', 'mail.shopoila.ir');
+define('MAIL_HOST', 'mail.mail.com');
 define('SMTP_AUTH', true);
-define('MAIL_USERNAME', 'support@shopoila.ir');
-define('MAIL_PASSWORD', '!2345Qwe24625');
+define('MAIL_USERNAME', 'support@mail.com');
+define('MAIL_PASSWORD', '***********');
 define('MAIL_PORT', 587);
-define('SENDER_MAIL', 'support@shopoila.ir');
+define('SENDER_MAIL', 'support@mail.com');
 define('SENDER_NAME', 'iman admin');
 
 
